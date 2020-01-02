@@ -1,4 +1,5 @@
 import logging
+import os
 import cv2
 import bme280
 import smbus2
@@ -92,4 +93,4 @@ def poll(token):
 
 
 if __name__ == "__main__":
-    poll("token")
+    poll(os.getenv("BOT_TOKEN"))
