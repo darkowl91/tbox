@@ -1,0 +1,10 @@
+{
+    "openhab.host": "10.6.203.1",
+    "openhab.port": 8080,
+    "openhab.remoteLspEnabled": true,
+    "openhab.remoteLspPort": 5007,
+    "java.format.settings.url": "https://raw.githubusercontent.com/openhab/openhab-docs/master/developers/ESH.xml",
+    "java.format.enabled": true,
+    "java.format.settings.profile": "ESH",
+    "java.saveActions.organizeImports": true
+}

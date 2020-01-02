@@ -1,0 +1,31 @@
+rule "Convert Climate"
+   when
+      Item Climate changed
+   then
+      var climate_str = Climate.state.toString
+      val values = climate_str.split(',')
+
+      Temperature.postUpdate(values.get(0))
+      Humidity.postUpdate(values.get(1))
+      Pressure.postUpdate(values.get(2))
+end
+
+
+rule "Set Servo X"
+   when
+      Item ServoX changed 
+   then
+      servoPulse.sendCommand("0 " + ServoX.state.toString)
+      servoRun.sendCommand(ON)
+      logInfo("servo-x", servoOut.state.toString)
+end
+
+
+rule "Set Servo Y"
+   when
+      Item ServoY changed
+   then
+      servoPulse.sendCommand("1 " + ServoY.state.toString)
+      servoRun.sendCommand(ON)
+      logInfo("servo-y", servoOut.state.toString)
+end

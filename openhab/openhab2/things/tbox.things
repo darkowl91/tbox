@@ -1,0 +1,10 @@
+Thing exec:command:bme-read [
+    command="python3 /etc/openhab2/scripts/bme.py",
+    interval=3600,
+    timeout=5,
+    autorun=true ]
+
+Thing exec:command:servo-run [
+    command="python3 /etc/openhab2/scripts/pca.py %2$s",
+    timeout=5,
+    autorun=false ]

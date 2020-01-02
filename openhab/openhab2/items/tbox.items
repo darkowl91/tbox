@@ -1,0 +1,21 @@
+Switch Releay_1 "Light" <light> ["Lighting"] { gpio="pin:24" } 
+Switch Releay_2 "UV-Light" <light> ["Lighting"] { gpio="pin:23" } 
+Switch Releay_3 "Heater-Top" <switch> ["Switchable"] { gpio="pin:22" } 
+Switch Releay_4 "Heater-Bottom" <switch> ["Switchable"] { gpio="pin:27" }
+
+String Climate "Climate" {channel="exec:command:bme-read:output"}
+
+Group g_Termostat "Thermostat" [ "Thermostat", "Celsius" ]
+Number Temperature "Temperature [%.1f °C]" <temperature> (g_Termostat) ["CurrentTemperature"]
+Number Humidity "Humidity [%.1f %%]" <humidity> (g_Termostat) ["CurrentHumidity"]
+Number Pressure "Pressure [%.1f hPa]" <pressure> (g_Termostat) ["CurrentPressure"]
+//  todo: expose heater as termostat 
+String Mode "Termostat Mode" (g_Termostat) ["homekit:TargetHeatingCoolingMode"]
+Number TargetTemperature "Target Temperature" (g_Termostat) ["homekit:TargetTemperature"]
+
+String servoPulse {channel="exec:command:servo-run:input"}
+Switch servoRun {channel="exec:command:servo-run:run"}
+String servoOut {channel="exec:command:servo-run:output"}
+
+Number ServoX "Servo-X [%d]" <settings>
+Number ServoY "Servo-Y [%d]" <settings>

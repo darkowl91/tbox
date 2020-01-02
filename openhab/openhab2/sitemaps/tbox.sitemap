@@ -1,0 +1,21 @@
+sitemap tbox label="tBox" {
+    Frame label="Relay"{
+        Switch item=Releay_1 label="LED" icon="light"
+        Switch item=Releay_2 label="UV-Light" icon="light"
+        Switch item=Releay_3 label="Heater-Top" icon="switch"
+        Switch item=Releay_4 label="Heater-Bottom" icon="switch"
+    }
+    Frame label="Climate" {
+        Text item=Temperature label="Temperature" icon="temperature"
+        Text item=Humidity  label="Humidity" icon="humidity"
+        Text item=Pressure label="Pressure" icon="pressure"
+        Chart item=Temperature label="Temperature Chart" icon="temperature" refresh=30000 service="influxdb" period=2D
+        Chart item=Humidity label="Humidity Chart" icon="humidity" refresh=30000 service="influxdb" period=2D
+        Chart item=Pressure label="Pressure Chart" icon="pressure" refresh=30000 service="influxdb" period=2D
+    }
+    Frame label="Camera" {
+        Video url="http://127.0.0.1:9092" encoding="mpeg4"
+        Slider item=ServoX label="Servo-X" icon="settings" sendFrequency=1 minValue=100 maxValue=500
+        Slider item=ServoY label="Servo-Y" icon="settings" sendFrequency=1 minValue=100 maxValue=500
+    }
+}
