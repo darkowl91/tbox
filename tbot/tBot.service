@@ -3,6 +3,7 @@ Description=tBot service
 After=network.target
 
 [Service]
+Environment="BOT_TOKEN="
 ExecStart=/usr/bin/python3 "/home/pi/tbot/bot.py"
 WorkingDirectory=/home/pi/tbot
 StandardOutput=inherit

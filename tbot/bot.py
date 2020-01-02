@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import logging
 import os
 import cv2
@@ -44,8 +46,9 @@ def command_photo(update, context):
             return
 
         bytes = BytesIO(buf.tobytes())
-        title = "🐢 " + (date.today().strftime("%b-%d-%Y"))
-        update.message.reply_photo(photo=bytes, caption=title)
+        title = "🐢📸 [clydethetortoise_official](https://www.instagram.com/clydethetortoise_official)"
+        update.message.reply_photo(
+            photo=bytes, caption=title, parse_mode="Markdown")
     except Exception as e:
         logging.error(e)
 
