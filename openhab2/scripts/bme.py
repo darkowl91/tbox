@@ -25,6 +25,8 @@ def main():
     except Exception as e:
         print(e, file=sys.stderr)
         return -1
+    finally:
+        _bus.close()
 
     return 0
 
