@@ -14,7 +14,6 @@ sitemap tbox label="tBox" {
         Chart item=Pressure label="Pressure Chart" icon="pressure" refresh=30000 service="influxdb" period=2D
     }
     Frame label="Camera" {
-        Video url="http://127.0.0.1:9092" encoding="mpeg4"
         Slider item=ServoX label="Servo-X" icon="settings" sendFrequency=1 minValue=100 maxValue=500
         Slider item=ServoY label="Servo-Y" icon="settings" sendFrequency=1 minValue=100 maxValue=500
     }
