@@ -13,7 +13,7 @@ end
 
 rule "Set Servo X"
    when
-      Item ServoX changed 
+      Item ServoX changed
    then
       servoPulse.sendCommand("0 " + ServoX.state.toString)
       servoRun.sendCommand(ON)
@@ -28,4 +28,22 @@ rule "Set Servo Y"
       servoPulse.sendCommand("1 " + ServoY.state.toString)
       servoRun.sendCommand(ON)
       logInfo("servo-y", servoOut.state.toString)
+end
+
+
+rule "UV-Ligth ON"
+    when
+        Time cron "0 0 6 1/1 * ? *"
+    then
+        Releay_2.sendCommand(ON)
+        logInfo("relay-2", "UV-Light is ON")
+end
+
+
+rule "UV-Ligth OFF"
+    when
+        Time cron "0 0 18 1/1 * ? *"
+    then
+        Releay_2.sendCommand(OFF)
+        logInfo("relay-2", "UV-Light is OFF")
 end
