@@ -47,3 +47,13 @@ rule "UV-Ligth OFF"
         Releay_2.sendCommand(OFF)
         logInfo("relay-2", "UV-Light is OFF")
 end
+
+rule "Heater OFF"
+    when
+        Temperature.state >= 30
+    then
+        Releay_3.sendCommand(OFF)
+        Releay_4.sendCommand(OFF)
+        logInfo("relay-3, relay-4", "Heater OFF")
+        sendBroadcastNotification("Heater OFF", "heating", "WARN")
+end

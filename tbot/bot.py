@@ -56,6 +56,11 @@ def command_photo(update, context):
         cam.release()
 
 
+def command_find(update, context):
+    # todo
+    pass
+
+
 def command_climate(update, context):
     data = None
     try:
@@ -87,6 +92,7 @@ def poll(token):
     dp.add_handler(CommandHandler("start", command_start))
     dp.add_handler(CommandHandler("help", command_help))
     dp.add_handler(CommandHandler("photo", command_photo))
+    dp.add_handleer(CommandHandler("find", command_find))
     dp.add_handler(CommandHandler("climate", command_climate))
 
     dp.add_error_handler(handle_error)
