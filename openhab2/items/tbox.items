@@ -1,4 +1,4 @@
-Switch Releay_1 "Light" <light> ["Lighting"] { gpio="pin:24" } 
+Switch Releay_1 "Light" <light> ["Lighting"] { gpio="pin:25" } 
 Switch Releay_2 "UV-Light" <light> ["Lighting"] { gpio="pin:23" } 
 Switch Releay_3 "Heater-Top" <switch> ["Switchable"] { gpio="pin:22" } 
 Switch Releay_4 "Heater-Bottom" <switch> ["Switchable"] { gpio="pin:27" }
