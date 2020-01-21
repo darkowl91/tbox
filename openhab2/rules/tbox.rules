@@ -50,10 +50,12 @@ end
 
 rule "Heater OFF"
     when
-        Temperature.state >= 30
+       Item Temperature received update
     then
-        Releay_3.sendCommand(OFF)
-        Releay_4.sendCommand(OFF)
-        logInfo("relay-3, relay-4", "Heater OFF")
-        sendBroadcastNotification("Heater OFF", "heating", "WARN")
+        if(Temperature.state > 30) {
+            Releay_3.sendCommand(OFF)
+            Releay_4.sendCommand(OFF)
+            logInfo("relay-3, relay-4", "Heater OFF")
+            sendBroadcastNotification("Heater OFF", "heating", "WARN")
+        }
 end
