@@ -5,11 +5,10 @@ import os
 import cv2
 import bme280
 import smbus2
-import datetime
 import RPi.GPIO as GPIO
+from datetime import datetime, time
 from telegram.ext import Updater, CommandHandler
 from io import BytesIO
-from datetime import date
 
 LED_PIN = 25
 
@@ -93,10 +92,18 @@ def handle_error(update, context):
 
 
 def flash(value=None):
-    if value and (datetime.time(22, 0) <= datetime.now() <= datetime.time(5, 0)):
+    if value and isNowInTimePeriod(time(22, 0), time(5, 0)):
         GPIO.output(LED_PIN, value)
     elif not value:
         GPIO.output(LED_PIN, False)
+
+
+def isNowInTimePeriod(startTime, endTime):
+    nowTime = datetime.now().time()
+    if startTime < endTime:
+        return nowTime >= startTime and nowTime <= endTime
+    else:
+        return nowTime >= startTime or nowTime <= endTime
 
 
 def poll(token):
@@ -106,13 +113,14 @@ def poll(token):
     dp.add_handler(CommandHandler("start", command_start))
     dp.add_handler(CommandHandler("help", command_help))
     dp.add_handler(CommandHandler("photo", command_photo))
-    dp.add_handleer(CommandHandler("find", command_find))
+    dp.add_handler(CommandHandler("find", command_find))
     dp.add_handler(CommandHandler("climate", command_climate))
 
     dp.add_error_handler(handle_error)
 
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(LED_PIN, GPIO.OUT)
+    GPIO.setwarnings(False)
 
     updater.start_polling()
     updater.idle()
