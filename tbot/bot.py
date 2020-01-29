@@ -36,6 +36,8 @@ def command_photo(update, context):
 
     cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)
+    # skip frames to normalize cam output
+    cam.set(cv2.CAP_PROP_POS_FRAMES, 25)
 
     flash(True)
 
