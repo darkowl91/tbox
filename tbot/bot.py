@@ -5,9 +5,13 @@ import os
 import cv2
 import bme280
 import smbus2
+import datetime
+import RPi.GPIO as GPIO
 from telegram.ext import Updater, CommandHandler
 from io import BytesIO
 from datetime import date
+
+LED_PIN = 25
 
 
 def command_start(update, context):
@@ -34,6 +38,8 @@ def command_photo(update, context):
     cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)
 
+    flash(True)
+
     check, frame = cam.read()
     if not check:
         logging.error("could not read /dev/video0")
@@ -53,6 +59,7 @@ def command_photo(update, context):
         logging.error(e)
 
     finally:
+        flash(False)
         cam.release()
 
 
@@ -85,6 +92,13 @@ def handle_error(update, context):
     logging.error('Update "%s" caused error "%s"', update, context.error)
 
 
+def flash(value=None):
+    if value and (datetime.time(22, 0) <= datetime.now() <= datetime.time(5, 0)):
+        GPIO.output(LED_PIN, value)
+    elif not value:
+        GPIO.output(LED_PIN, False)
+
+
 def poll(token):
     updater = Updater(token, use_context=True)
     dp = updater.dispatcher
@@ -96,6 +110,9 @@ def poll(token):
     dp.add_handler(CommandHandler("climate", command_climate))
 
     dp.add_error_handler(handle_error)
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(LED_PIN, GPIO.OUT)
 
     updater.start_polling()
     updater.idle()
