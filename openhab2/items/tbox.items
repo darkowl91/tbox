@@ -1,7 +1,7 @@
-Switch Releay_1 "Light" <light> ["Lighting"] { gpio="pin:25" } 
-Switch Releay_2 "UV-Light" <light> ["Lighting"] { gpio="pin:23" } 
-Switch Releay_3 "Heater-Top" <switch> ["Switchable"] { gpio="pin:22" } 
-Switch Releay_4 "Heater-Bottom" <switch> ["Switchable"] { gpio="pin:27" }
+Switch Releay_1 "Light" <light> ["Lighting"] { gpio="pin:25 activelow:no initialValue:low"} 
+Switch Releay_2 "UV-Light" <light> ["Lighting"] { gpio="pin:23 activelow:no initialValue:low" } 
+Switch Releay_3 "Heater-Top" <switch> ["Switchable"] { gpio="pin:22 activelow:no initialValue:low" } 
+Switch Releay_4 "Heater-Bottom" <switch> ["Switchable"] { gpio="pin:27 activelow:no initialValue:low" }
 
 String Climate "Climate" {channel="exec:command:bme-read:output"}
 
